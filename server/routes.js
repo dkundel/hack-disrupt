@@ -53,6 +53,22 @@ module.exports = function(app) {
     app.post('/:module', (req, res) => require('./api-modules')(req.params.module)(req, res));
   }
 
+  // app.post('/zalando', function(req, res){
+  //   let zalando = require('./api-modules/zalando')({}, {}, {});
+  //   zalando(req.body)
+  //     .then(function(val){console.log(val); res.send(val);})
+  //     .catch(function(val){console.log(val); res.send(val);});
+  // });
+
+  // app.post('/twilio', function(req, res){
+  //   let twilio = require('./api-modules/twilio')({}, {}, {});
+  //   twilio(req.body)
+  //     .then(function(val){console.log(val); res.send(val);})
+  //     .catch(function(val){console.log(val); res.send(val);});
+  // });
+
+  // All undefined asset or api routes should return a 404
+
   // All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
