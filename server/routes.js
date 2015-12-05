@@ -6,6 +6,7 @@
 var apiModules = require('./api-modules');
 var errors = require('./components/errors');
 var path = require('path');
+var _ = require('lodash');
 
 var handleRequest = (route, req, res) => {
   var promise = null;
@@ -16,10 +17,10 @@ var handleRequest = (route, req, res) => {
       console.log("Initializing chain with module:" + handle.module);
       promise = apiModules(handle.module)(handle.config, req, req.body);
     } else{
-      console.log("Continuing chain with module:" + handle.module);
+      console.log("Continuing with module:" + handle.module);
 
       var localPromise = promise;
-      promise = localPromise.then(v => apiModules(handle.module)(handle.config, req, v));
+      promise = localPromise.then(v => apiModules(handle.module)(handle.config, req, _.merge(req.body, v)));
 
       localPromise.catch(function(val){console.log(val); res.send(val);});
     }
@@ -35,7 +36,6 @@ module.exports = function(app) {
   //app.use('/auth', require('./auth'));
   try{
     var routes = require('./api/definition').routes;
-
     for(var i in routes){
       let route = routes[i];
       console.log("Route: " +  route);
@@ -50,6 +50,7 @@ module.exports = function(app) {
     }
   }
   catch (e){
+    // TODO
     app.post('/:module', (req, res) => require('./api-modules')(req.params.module)(req, res));
   }
 
