@@ -63,6 +63,13 @@ module.exports = function(app) {
       .catch(function(val){console.log(val); res.send(val);});
   });
 
+  app.post('/esrifind', function(req, res){
+    let esri = require('./api-modules/esriFind')({}, {}, {});
+    esri(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
   app.post('/zalando', function(req, res){
     let zalando = require('./api-modules/zalando')({}, {}, {});
     zalando(req.body)
