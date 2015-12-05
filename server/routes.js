@@ -33,6 +33,8 @@ var handleRequest = (route, req, res) => {
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/modules', require('./api/module'));
+  app.use('/api/definitions', require('./api/definitions'));
   //app.use('/auth', require('./auth'));
   try{
     var routes = require('./api/definition').routes;
