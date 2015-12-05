@@ -3,13 +3,13 @@
 let template = function(config, req, env, value){
 	return {
 		configuration: {
-			accountSid: env.accountSid || '***REMOVED***',
-			authToken: env.authToken || '***REMOVED***'
+			accountSid: env.accountSid,
+			authToken: env.authToken
 		},
 		params: {
-			to: value.to || "***REMOVED***",
-			from: value.from || "+441915801692",
-			body: value.body || "Test",
+			to: value.to,
+			from: value.from,
+			body: value.body,
 		}
 	}
 }
