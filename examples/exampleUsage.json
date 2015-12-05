@@ -1,33 +1,34 @@
-{
-  "request": {
-    "type": "GET",
+[{
+    "type": "POST",
     "url": "/example/:id",
-    "handle": {
-      "module": "mongodb-find",
-      "config": {
-        "connection": {
-          "address": "{{ENV.MONGO}}",
-          "database": "WhatEver",
-          "collection": "people"
-        },
-        "criteria": {
-          "$id": "123"
-        }
-      },
-      "handle": {
-        "module": "twilio-send-sms",
-        "config": {
-          "configuration": {
-            "AccountSid": "{{ENV.TWILIO_ACCOUNT_SID}}",
-            "Token": "A hidden token"
-          },
-          "post-parameters": {
-            "From": "+123456789",
-            "To": "{{value.Phone}}",
-            "Body": "Hi, {{value.Name}}! How are you?"
-          }
-        }
-      }
-    }
-  }
-}
+	"handles": [
+		{
+		"module": "mongodb",
+		"config": {
+			"configuration": {
+				"hostname": "{{env.hostname}}",
+				"port": "{{env.port}}",
+				"database": "{{env.database}}",
+				"collection": "{{value.collection}}"
+			},
+			"params": {
+				"email": "{{value.email}}"
+			}
+		}
+		},
+		{
+		"module": "twilio",
+		"config": {
+			"configuration": {
+				"accountSid": "{{env.accountSid}}",
+				"authToken": "{{env.authToken}}"
+			},
+			"params": {
+				"from": "{{value.from}}",
+				"to": "{{value.to}}",
+				"body": "Hi, {{value.name}}! How are you?"
+			}
+		}
+		}
+	]
+}]
