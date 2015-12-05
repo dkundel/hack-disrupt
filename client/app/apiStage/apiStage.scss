@@ -1,0 +1,22 @@
+#apiPane {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+#apiStage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+#svgContainer {
+  position: absolute;
+}
+
+path {
+  fill:   none;
+  stroke: #000;
+  stroke-width: 0.7em;
+}

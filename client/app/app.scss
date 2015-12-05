@@ -19,6 +19,7 @@ $darkgrey: #474f5b;
 $darkgrey-light: #6e7b8d;
 $lightcolor: #f5f3f5;
 $lightgrey: #e2e1e2;
+$lightest: #eee;
 $highlight: #3498db;
 $backgroundblue: #59aae2;
 $highlight-second: #e14d4c;
@@ -33,6 +34,8 @@ body {
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'apiEntry/apiEntry.scss';
+@import 'apiStage/apiStage.scss';
 @import 'main/main.scss';
 @import 'modal/modal.scss';
 // endinjector

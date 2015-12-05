@@ -3,7 +3,11 @@ extends ../../templates/scaffold.jade
 block content
   #apiPane
     #endPointName
-      p /example/:id
+      p
+        small {{fullConfig.type}}
+        | {{fullConfig.url}}
 
     #createButton
       span.fa.fa-plus.fa-3x
+
+    #apiStage(api-stage)

@@ -4,6 +4,8 @@
     "url": "/example/:id",
     "handle": {
       "module": "mongodb-find",
+      "y": 50,
+      "x": 30,
       "config": {
         "connection": {
           "address": "{{ENV.MONGO}}",
@@ -16,6 +18,8 @@
       },
       "handle": {
         "module": "twilio-send-sms",
+        "y": 200,
+        "x": 500,
         "config": {
           "configuration": {
             "AccountSid": "{{ENV.TWILIO_ACCOUNT_SID}}",

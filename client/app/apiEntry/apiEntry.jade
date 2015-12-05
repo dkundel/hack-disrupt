@@ -1,0 +1,11 @@
+.api-entry
+  .api-entry--header
+    img.api-entry--logo(ng-src="{{::module.logo}}", width="40", height="40").pull-left
+    h1.api-entry--title {{::module.name}}
+    h2.api-entry--type.pull-right {{::module.type}}
+  .api-entry--body
+    .api-entry--config(ng-repeat="conf in module.config")
+      h3 {{::conf.name}}
+      .api-entry--config-entry(ng-repeat="opt in conf.options")
+        label {{::opt.name}}
+        input(placeholder="", type="text", ng-model="configuration[conf.id][opt.id]")
