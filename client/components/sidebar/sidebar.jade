@@ -1,0 +1,40 @@
+#sidebar(ng-controller='SidebarCtrl')
+  h1#appName
+    | UnicornLabs
+    span .xyz
+
+  #projectNameContainer
+    h2.section-headline#projectName
+      | Project Name
+      span.pull-right
+        span.fa.fa-edit
+
+  #endpointsContainer
+    h2.section-headline
+      | Endpoints
+      span.pull-right
+        span.fa.fa-plus
+
+    #endpointsList
+      button.endpoint-entry(ng-repeat="endp in endpoints")
+        span.endpoint-entry--type {{endp.type}}
+        span.endpoint-entry--url {{endp.url}}
+
+  #envVariablesContainer
+    h2.section-headline
+      | Enviornment Variables
+      span.pull-right
+        span.fa.fa-chevron-down
+    #envVariablesList
+
+  #settingsContainer
+    h2.section-headline
+      | Settings
+      span.pull-right
+        span.fa.fa-chevron-down
+    #settingsList
+
+#downloadContainer
+  button.btn.download-btn
+    span.fa.fa-cloud-download
+    span Download
