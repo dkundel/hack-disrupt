@@ -3,11 +3,11 @@
 let template = function(config, req, env, value){
 	return {
 		configuration: {
-			accountSid: env.accountSid || '***REMOVED***',
-			authToken: env.authToken || '***REMOVED***'
+			accountSid: env.accountSid || 'AC46a6c3ce31a815159c907ef09b015994',
+			authToken: env.authToken || 'c5c8435d17944fee07550e024744ed4c'
 		},
 		params: {
-			to: value.to || "***REMOVED***",
+			to: value.to || "+447858909938",
 			from: value.from || "+441915801692",
 			body: value.body || "Test",
 		}

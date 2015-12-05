@@ -1,34 +1,159 @@
-.thing-form {
-    margin: 20px 0;
+// .thing-form {
+//     margin: 20px 0;
+// }
+//
+// #banner {
+//     border-bottom: none;
+//     margin-top: -20px;
+// }
+//
+// #banner h1 {
+//     font-size: 60px;
+//     line-height: 1;
+//     letter-spacing: -1px;
+// }
+//
+// .hero-unit {
+//     position: relative;
+//     padding: 30px 15px;
+//     color: #F5F5F5;
+//     text-align: center;
+//     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+//     background: #4393B9;
+// }
+//
+// .footer {
+//     text-align: center;
+//     padding: 30px 0;
+//     margin-top: 70px;
+//     border-top: 1px solid #E5E5E5;
+// }
+//
+// .navbar-text {
+//   margin-left: 15px;
+// }
+
+html, body, body > div {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
-}
+#main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
-}
+  #leftPane {
+    width: 360px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: $darkgrey;
+    color: $lightcolor;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-.hero-unit {
+  #appName {
+    font-weight: 600;
+    font-size: 25px;
+    color: $highlight;
+
+    span {
+      font-weight: 200;
+    }
+  }
+
+  .section-headline {
+    font-weight: 200;
+    font-size: 16px;
+    border-bottom: 1px solid $darkgrey-light;
+    padding-bottom: 10px;
+  }
+
+  .endpoint-entry {
+    display: block;
+    width: 100%;
+    background: $darkgrey;
+    border: 0;
+    outline: 0;
+    text-align: left;
+
+    .endpoint-entry--url {
+      font-family: 'Source Code Pro';
+      font-size: 16px;
+      padding-left: 15px;
+      text-overflow: ellipsis;
+    }
+
+    .endpoint-entry--type {
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+
+  #downloadContainer {
+    padding-bottom: 45px;
+  }
+
+  .download-btn {
+    width: 100%;
+    padding: 15px 30px;
+    border-radius: 0;
+    border-color: $darkgrey-light;
+    background: $darkgrey;
+    color: $lightcolor;
+  }
+
+  #rightPane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .navbar {
+      margin-bottom: 0;
+    }
+  }
+
+  #apiPane {
+    background-color: $backgroundblue;
+    flex: 1;
     position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
-}
+    background-image: url(/assets/images/grid.png)
+  }
 
-.footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
-}
+  #endPointName {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    background: $lightcolor;
+    p {
+      margin: 15px 30px;
+      line-height: 1;
+    }
+  }
 
-.navbar-text {
-  margin-left: 15px;
+  #createButton {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    background: $highlight-second;
+    text-align: center;
+
+    span {
+      vertical-align: middle;
+      line-height: 80px;
+      color: #fff;
+    }
+  }
+
+  .account-image {
+    margin: 5px 15px;
+  }
 }
