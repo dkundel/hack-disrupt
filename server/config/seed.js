@@ -13,6 +13,25 @@ var path = require('path');
 
 Definition.find({}).remove(() => {
   Definition.create({
+	  "type": "POST",
+    "url": "/user/",
+	"handles": [
+		{
+		"module": "mongodb-insert",
+		"config": {
+			"configuration": {
+				"hostname": "{{env.hostname}}",
+				"port": "{{env.port}}",
+				"database": "{{env.database}}",
+				"collection": "testUsers"
+			},
+			"params": {
+				"email": "{{value.email}}",
+				"name": "{{value.name}}"
+			}
+		}
+		}]}),
+  Definition.create({
       "type": "POST",
       "url": "/example/:id",
     "handles": [
