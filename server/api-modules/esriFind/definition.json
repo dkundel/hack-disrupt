@@ -1,0 +1,17 @@
+{
+  "id": "esriFind",
+  "name": "Esri Find",
+  "type": "Find",
+  "category": "Other",
+  "logo": "http://webapps-cdn.esri.com/Apps/MegaMenu/img/logo.jpg",
+  "config": [
+    {
+      "params": [
+        {
+          "name": "Address",
+          "id": "address"
+        }
+      ]
+    }
+  ]
+}
