@@ -1,6 +1,7 @@
 #svgContainer
   svg#paths(width="0", height="0")
-    path(ng-repeat='conn in connections', id="path{{::$index}}")
+    path#pathOrigin
+    path(ng-repeat='entry in configuration.handles', id="path{{::$index}}")
 
 
-api-entry(ng-repeat='entry in entries', id='apiEntry{{::$index}}', config='entry.config', module='modules[entry.module]', x='entry.x', y='entry.y')
+api-entry(ng-repeat='entry in configuration.handles', id='apiEntry{{::$index}}', config='entry.config', module='modules[entry.module]', x='entry.x', y='entry.y')

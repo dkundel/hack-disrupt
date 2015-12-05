@@ -1,0 +1,39 @@
+{
+  "id": "mongodb",
+  "name": "MongoDB",
+  "type": "Find",
+  "category": "Other",
+  "logo": "http://placehold.it/40x40",
+  "config": [
+    {
+      "name": "Configuration",
+      "id": "configuration",
+      "options": [
+        {
+          "name": "Database Name",
+          "id": "hostname",
+        },
+        {
+          "name": "Port",
+          "id": "port"
+        },
+        {
+          "name": "Hostname",
+          "id": "hostname"
+        },
+        {
+          "name": "Collection",
+          "id": "collection"
+        }
+      ]
+    },
+    {
+      "name": "Parameters",
+      "id": "params",
+      "options": [{
+        "name": "Email",
+        "id": "email"
+      }]
+    }
+  ]
+}

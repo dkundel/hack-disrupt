@@ -3,8 +3,8 @@
 angular.module('hackDisruptApp')
   .controller('MainCtrl', function ($scope, $http, $rootScope) {
     $scope.modules = {
-      'twilio-send-sms': {
-        "id": "twilio-send-sms",
+      'twilio': {
+        "id": "twilio",
         "name": "Twilio Send SMS",
         "type": "POST",
         "category": "Other",
@@ -16,110 +16,117 @@ angular.module('hackDisruptApp')
             "options": [
               {
                 "name": "Account SID",
-                "id": "AccountSid"
+                "id": "accountSid"
               },
               {
-                "name": "Token",
-                "id": "Token"
+                "name": "Auth Token",
+                "id": "authToken"
               }
             ]
           },
           {
-            "name": "POST Parameters",
-            "id": "post-parameters",
+            "name": "Parameters",
+            "id": "params",
             "options": [
               {
                 "name": "From",
-                "id": "From"
+                "id": "from"
               },
               {
                 "name": "To",
-                "id": "To"
+                "id": "to"
               },
               {
                 "name": "Message",
-                "id": "Body"
+                "id": "body"
               }
             ]
           }
         ]
       },
-      'mongodb-find': {
-        'id': 'mongodb-find',
+      'mongodb': {
+        'id': 'mongodb',
         'name': 'MongoDB',
         'type': 'Find',
         'category': 'Other',
         'logo': 'http://placehold.it/40x40',
         'config': [
           {
-            'name': 'Connection',
-            'id': 'connection',
+            'name': 'Configuration',
+            'id': 'configuration',
             'options': [
               {
                 'name': 'Database Name',
-                'id': 'dbname'
+                'id': 'hostname',
+              },
+              {
+                'name': 'Port',
+                'id': 'port'
+              },
+              {
+                'name': 'Hostname',
+                'id': 'hostname'
+              },
+              {
+                'name': 'Collection',
+                'id': 'collection'
               }
             ]
+          },
+          {
+            'name': 'Parameters',
+            'id': 'params',
+            'options': [{
+              'name': 'Email',
+              'id': 'email'
+            }]
           }
         ]
       }
     };
 
     let config = {
-      "request": {
-        "type": "GET",
-        "url": "/example/:id",
-        "handle": {
-          "module": "mongodb-find",
-          "y": 50,
-          "x": 30,
-          "config": {
-            "connection": {
-              "address": "{{ENV.MONGO}}",
-              "database": "WhatEver",
-              "collection": "people"
-            },
-            "criteria": {
-              "$id": "123"
-            }
-          },
-          "handle": {
-            "module": "twilio-send-sms",
-            "y": 600,
-            "x": 500,
-            "config": {
-              "configuration": {
-                "AccountSid": "{{ENV.TWILIO_ACCOUNT_SID}}",
-                "Token": "A hidden token"
-              },
-              "post-parameters": {
-                "From": "+123456789",
-                "To": "{{value.Phone}}",
-                "Body": "Hi, {{value.Name}}! How are you?"
-              }
-            }
-          }
+      "type": "POST",
+      "url": "/example/:id",
+    "handles": [
+      {
+      "module": "mongodb",
+      "x": 100,
+      "y": 150,
+      "config": {
+        "configuration": {
+          "hostname": "{{env.hostname}}",
+          "port": "{{env.port}}",
+          "database": "{{env.database}}",
+          "collection": "{{value.collection}}"
+        },
+        "params": {
+          "email": "{{value.email}}"
         }
       }
-    };
-
-    convertData(config.request.handle);
-    $scope.fullConfig = config.request;
-
-    function convertData(configuration) {
-      $scope.connections = [];
-      $scope.entries = [];
-      while(configuration.handle) {
-        let current = $scope.entries.length;
-        $scope.entries.push(angular.copy(configuration));
-        delete $scope.entries[current].handle;
-        $scope.connections.push({from: current, to: current+1});
-        configuration = configuration.handle;
+      },
+      {
+      "module": "twilio",
+      "x": 100,
+      "y": 480,
+      "config": {
+        "configuration": {
+          "accountSid": "{{env.accountSid}}",
+          "authToken": "{{env.authToken}}"
+        },
+        "params": {
+          "from": "{{value.from}}",
+          "to": "{{value.to}}",
+          "body": "Hi, {{value.name}}! How are you?"
+        }
       }
-      $scope.entries.push(configuration);
+      }
+    ]
+  };
 
-      $rootScope.$on('api-entry-update', () => {
-        console.dir($scope.entries);
-      });
-    }
+    $rootScope.$on('api-entry-update', () => {
+      console.dir($scope.configuration.handles);
+    });
+
+    $scope.configuration = config;
   });
