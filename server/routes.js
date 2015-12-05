@@ -12,9 +12,16 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/outlook', require('./api/outlook'));
 
   app.use('/auth', require('./auth'));
-  
+  app.post('/twilio', function(req, res){
+    let twilio = require('./api-modules/twilio')({}, {}, {});
+    twilio(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
