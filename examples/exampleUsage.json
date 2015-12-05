@@ -1,0 +1,33 @@
+{
+  "request": {
+    "type": "GET",
+    "url": "/example/:id",
+    "handle": {
+      "module": "mongodb-find",
+      "config": {
+        "connection": {
+          "address": "{{ENV.MONGO}}",
+          "database": "WhatEver",
+          "collection": "people"
+        },
+        "criteria": {
+          "$id": "123"
+        }
+      },
+      "handle": {
+        "module": "twilio-send-sms",
+        "config": {
+          "configuration": {
+            "AccountSid": "{{ENV.TWILIO_ACCOUNT_SID}}",
+            "Token": "A hidden token"
+          },
+          "post-parameters": {
+            "From": "+123456789",
+            "To": "{{value.Phone}}",
+            "Body": "Hi, {{value.Name}}! How are you?"
+          }
+        }
+      }
+    }
+  }
+}
