@@ -10,10 +10,6 @@ var path = require('path');
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/api/things', require('./api/thing'));
-  app.use('/api/users', require('./api/user'));
-  app.use('/api/outlook', require('./api/outlook'));
-
   app.use('/auth', require('./auth'));
   app.post('/twilio', function(req, res){
     let twilio = require('./api-modules/twilio')({}, {}, {});
