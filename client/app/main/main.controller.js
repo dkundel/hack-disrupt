@@ -108,7 +108,7 @@ angular.module('hackDisruptApp')
       {
       "module": "twilio",
       "x": 100,
-      "y": 480,
+      "y": 520,
       "config": {
         "configuration": {
           "accountSid": "{{env.accountSid}}",

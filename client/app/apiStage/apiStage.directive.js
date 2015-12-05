@@ -70,7 +70,7 @@ angular.module('hackDisruptApp')
       restrict: 'EA',
       link: function (scope, element, attrs) {
         let drawPaths = () => {
-          connectElements(element.find('#paths'), element.find(`#pathOrigin`), angular.element.find('#endPointName'), element.find(`#apiEntry0`));
+          connectElements(element.find('#paths'), element.find(`#pathOrigin`), angular.element('#endPointName'), element.find('#apiEntry0'));
           scope.configuration.handles.forEach((entry, idx) => {
             if (idx+1 !== scope.configuration.handles.length) {
               connectElements(element.find('#paths'), element.find(`#path${idx}`), element.find(`#apiEntry${idx}`), element.find(`#apiEntry${idx+1}`))

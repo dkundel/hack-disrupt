@@ -33,6 +33,8 @@ var handleRequest = (route, req, res) => {
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/modules', require('./api/module'));
+  app.use('/api/definitions', require('./api/definitions'));
   //app.use('/auth', require('./auth'));
   try{
     var routes = require('./api/definition').routes;
@@ -56,6 +58,13 @@ module.exports = function(app) {
 
   app.post('/esri', function(req, res){
     let esri = require('./api-modules/esri')({}, {}, {});
+    esri(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/esrifind', function(req, res){
+    let esri = require('./api-modules/esriFind')({}, {}, {});
     esri(req.body)
       .then(function(val){console.log(val); res.send(val);})
       .catch(function(val){console.log(val); res.send(val);});

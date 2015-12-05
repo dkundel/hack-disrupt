@@ -5,28 +5,66 @@
 
 'use strict';
 
-var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
+var Definition = require('../api/definitions/definition.model');
+var Module = require('../api/module/module.model');
+var fs = require('fs');
+var path = require('path');
 
-Thing.find({}).remove(function() {
-  Thing.create({
-    name : 'Development Tools',
-    info : 'Integration with popular tools such as Bower, Grunt, Karma, Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, Stylus, Sass, CoffeeScript, and Less.'
-  }, {
-    name : 'Server and Client integration',
-    info : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.'
-  }, {
-    name : 'Smart Build System',
-    info : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html'
-  },  {
-    name : 'Modular Structure',
-    info : 'Best practice client and server structures allow for more code reusability and maximum scalability'
-  },  {
-    name : 'Optimized Build',
-    info : 'Build process packs up your templates as a single JavaScript payload, minifies your scripts/css/images, and rewrites asset names for caching.'
-  },{
-    name : 'Deployment Ready',
-    info : 'Easily deploy your app to Heroku or Openshift with the heroku and openshift subgenerators'
+Definition.find({}).remove(() => {
+  Definition.create({
+      "type": "POST",
+      "url": "/example/:id",
+    "handles": [
+      {
+      "module": "mongodb",
+      "x": 100,
+      "y": 150,
+      "config": {
+        "configuration": {
+          "hostname": "{{env.hostname}}",
+          "port": "{{env.port}}",
+          "database": "{{env.database}}",
+          "collection": "{{value.collection}}"
+        },
+        "params": {
+          "email": "{{value.email}}"
+        }
+      }
+      },
+      {
+      "module": "twilio",
+      "x": 100,
+      "y": 520,
+      "config": {
+        "configuration": {
+          "accountSid": "{{env.accountSid}}",
+          "authToken": "{{env.authToken}}"
+        },
+        "params": {
+          "from": "{{value.from}}",
+          "to": "{{value.to}}",
+          "body": "Hi, {{value.name}}! How are you?"
+        }
+      }
+      }
+    ]
+  });
+});
+
+Module.find({}).remove(() => {
+  let basePath = path.join(__dirname, '../api-modules');
+  let files = fs.readdirSync(basePath);
+  files.forEach((file) => {
+    let stat = fs.statSync(path.join(basePath, file));
+    if (stat.isDirectory()) {
+      let defPath = path.join(basePath, file, 'definition.json');
+      let exists = fs.existsSync(defPath);
+      if (exists) {
+        let def = JSON.parse(fs.readFileSync(defPath));
+        Module.create(def);
+      }
+    }
   });
 });
 
