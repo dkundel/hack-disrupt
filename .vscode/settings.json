@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    ".sass-cache": true,
+    ".tmp": false
+  },
+  "search.exclude": {
+    ".sass-cache": true,
+    ".tmp": true
+  }
+}
