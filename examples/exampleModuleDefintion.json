@@ -1,0 +1,40 @@
+{
+  "id": "twilio-send-sms",
+  "name": "Twilio Send SMS",
+  "category": "Other",
+  "logo": "http://placehold.it/50x50",
+  "config": [
+    {
+      "name": "Configuration",
+      "id": "configuration",
+      "options": [
+        {
+          "name": "Account SID",
+          "id": "AccountSid"
+        },
+        {
+          "name": "Token",
+          "id": "Token"
+        }
+      ]
+    },
+    {
+      "name": "POST Parameters",
+      "id": "post-parameters",
+      "options": [
+        {
+          "name": "From",
+          "id": "From"
+        },
+        {
+          "name": "To",
+          "id": "To"
+        },
+        {
+          "name": "Message",
+          "id": "Body"
+        }
+      ]
+    }
+  ]
+}
