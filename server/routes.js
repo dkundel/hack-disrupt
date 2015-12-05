@@ -3,24 +3,55 @@
  */
 
 'use strict';
-
+var apiModules = require('./api-modules');
 var errors = require('./components/errors');
 var path = require('path');
+
+var handleRequest = (route, req, res) => {
+  var promise = null;
+  for(var i in route.handles){
+    var handle = route.handles[i];
+
+    if(promise == null){
+      console.log("Initializing chain with module:" + handle.module);
+      promise = apiModules(handle.module)(handle.config, req, req.body);
+    } else{
+      console.log("Continuing chain with module:" + handle.module);
+
+      var localPromise = promise;
+      promise = localPromise.then(v => apiModules(handle.module)(handle.config, req, v));
+
+      localPromise.catch(function(val){console.log(val); res.send(val);});
+    }
+  }
+
+  promise.then(function(val){console.log(val); res.send(val);});
+  promise.catch(function(val){console.log(val); res.send(val);});
+}
 
 module.exports = function(app) {
 
   // Insert routes below
-  app.use('/auth', require('./auth'));
-  app.post('/twilio', function(req, res){
-    let twilio = require('./api-modules/twilio')({}, {}, {});
-    twilio(req.body)
-      .then(function(val){console.log(val); res.send(val);})
-      .catch(function(val){console.log(val); res.send(val);});
-  });
+  //app.use('/auth', require('./auth'));
+  try{
+    var routes = require('./api/definition').routes;
 
-  // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-   .get(errors[404]);
+    for(var i in routes){
+      let route = routes[i];
+      console.log("Route: " +  route);
+
+      if(route.type == "POST"){
+        app.post(route.url, (req, res) => handleRequest(route, req, res));
+      }
+      else if(route.type == "GET"){
+        app.get(route.url, (req, res) => handleRequest(route, req, res));
+      }
+      console.log("Route ready: " + route.type + " " + route.url);
+    }
+  }
+  catch (e){
+    app.post('/:module', (req, res) => require('./api-modules')(req.params.module)(req, res));
+  }
 
   // All other routes should redirect to the index.html
   app.route('/*')
