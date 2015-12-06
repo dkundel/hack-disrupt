@@ -1,6 +1,8 @@
 'use strict';
 
 function drawPath(svg, path, startX, startY, endX, endY) {
+
+  
   // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
   var stroke =  parseFloat(path.css("stroke-width"));
   // check if the svg is big enough to draw the path, if not, set heigh/width
@@ -29,6 +31,27 @@ function drawPath(svg, path, startX, startY, endX, endY) {
                   " H" + (endX - delta*Math.sign(deltaX)) +
                   " A" + delta + " " +  delta + " 0 0 " + arc2 + " " + endX + " " + (startY + 3*delta) +
                   " V" + endY );
+                  
+  var divs = document.querySelectorAll('path');
+  
+  [].forEach.call(divs, function(path) {
+    // do whatever
+    var length = path.getTotalLength();
+    // Clear any previous transition
+    path.style.transition = path.style.WebkitTransition =
+      'none';
+    // Set up the starting positions
+    path.style.strokeDasharray = length + ' ' + length;
+    path.style.strokeDashoffset = length;
+    // Trigger a layout so styles are calculated & the browser
+    // picks up the starting position before animating
+    path.getBoundingClientRect();
+    // Define our transition
+    path.style.transition = path.style.WebkitTransition =
+    'stroke-dashoffset 1s ease-in-out';
+    // Go!
+    path.style.strokeDashoffset = '0';  
+  });                                
 }
 
 function connectElements(svg, path, startElem, endElem) {
@@ -60,6 +83,7 @@ function connectElements(svg, path, startElem, endElem) {
 
   // call function for drawing the path
   drawPath(svg, path, startX, startY, endX, endY+(startElem.outerHeight()/2));
+    
 }
 
 
