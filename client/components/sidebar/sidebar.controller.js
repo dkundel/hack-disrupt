@@ -8,4 +8,8 @@ angular.module('hackDisruptApp')
 
     $scope.Activate = Definitions.GetByIdx;
     $scope.Download = Definitions.Download;
+
+    angular.element('.download-btn').click(() => {
+      $scope.Download();
+    })
   });

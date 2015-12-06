@@ -88,6 +88,10 @@ Definition.find({}).remove(() => {
   });
 });
 
+Project.find({}).remove(() => {
+  
+});
+
 Module.find({}).remove(() => {
   let basePath = path.join(__dirname, '../api-modules');
   let files = fs.readdirSync(basePath);
