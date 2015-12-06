@@ -5,12 +5,8 @@ var mongoose = require('mongoose'),
 
 var ProjectSchema = new Schema({
   name: String,
-  env: [{
-    name: String,
-    value: String
-  }],
   settings: [{
-    name: String,
+    key: String,
     value: String
   }]
 });

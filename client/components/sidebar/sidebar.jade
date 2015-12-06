@@ -4,35 +4,46 @@
     span .xyz
 
   #projectNameContainer
+
     h2.section-headline#projectName
-      | Project Name
-      span.pull-right
-        span.fa.fa-edit
+      span(ng-hide="editName", ng-bind="project.name")
+      input#projectNameInput(type="text", ng-model="project.name", ng-show="editName")
+      span.pull-right(ng-click="editName = !editName")
+        span.fa(ng-class="{'fa-edit': !editName, 'fa-check': editName}")
 
   #endpointsContainer
     h2.section-headline
       | Endpoints
-      span.pull-right
+      span.pull-right(ng-click="Add()")
         span.fa.fa-plus
 
     #endpointsList
       button.endpoint-entry(ng-repeat="endp in endpoints", ng-click="Activate($index)")
         span.endpoint-entry--type {{endp.type}}
         span.endpoint-entry--url {{endp.url}}
+      #newEndpoint(ng-show="showAdd")
+        select(ng-model="newEndpoint.type")
+          option GET
+          option POST
+          option PUT
+          option PATCH
+          option DELETE
+        input(type="text", ng-model="newEndpoint.url")
+        button.btn.fa.fa-check.fa-lg.pull-right(ng-click="CreateNew()")
 
-  #envVariablesContainer
-    h2.section-headline
-      | Enviornment Variables
-      span.pull-right
-        span.fa.fa-chevron-down
-    #envVariablesList
 
   #settingsContainer
     h2.section-headline
       | Settings
-      span.pull-right
-        span.fa.fa-chevron-down
-    #settingsList
+      span.pull-right(ng-click="showSettings = !showSettings")
+        span.fa(ng-class="{'fa-chevron-down': !showSettings, 'fa-chevron-up': showSettings}")
+    #settingsList(ng-show="showSettings")
+      .setting-entry(ng-repeat="s in project.settings")
+        input(type="text", ng-model="s.key")
+        input(type="text", ng-model="s.value")
+    button.btn.new-setting(ng-click="NewSetting()", ng-show="showSettings")
+      span.fa.fa-fw.fa-plus
+      span New Setting
 
 #downloadContainer
   button.btn.download-btn

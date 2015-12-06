@@ -92,6 +92,13 @@ angular.module('hackDisruptApp')
         });
 
         $rootScope.$on('api-entry-moving', drawPaths)
+
+        $rootScope.$on('api-entry-delete', (idx) => {
+          scope.configuration.handles.splice(idx, 1);
+          $timeout(() => {
+            drawPaths()
+          }, 100);
+        });
       }
     };
   });

@@ -34,8 +34,10 @@ exports.update = function(req, res) {
   Project.findById(req.params.id, function (err, project) {
     if (err) { return handleError(res, err); }
     if(!project) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(project, req.body);
-    updated.save(function (err) {
+    Object.keys(req.body).forEach((key) => {
+      project[key] = req.body[key];
+    });
+    project.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(project);
     });

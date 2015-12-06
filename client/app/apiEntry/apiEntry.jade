@@ -9,3 +9,10 @@
       .api-entry--config-entry(ng-repeat="opt in conf.options")
         label {{opt.name}}
         input(placeholder="", type="text", ng-model="configuration[conf.id][opt.id]")
+
+  .api-entry--footer
+    #options
+      button.btn.api.option-btn
+        span.fa.fa-arrows-h
+      button.btn.api-option-btn.pull-right(ng-click="delete()")
+        span.fa.fa-trash
