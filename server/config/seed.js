@@ -32,7 +32,7 @@ Definition.find({}).remove(() => {
       {
       "module": "outlook-send",
       "x": 100,
-      "y": 500,
+      "y": 350,
       "config": {
         "configuration": {
         },
@@ -46,7 +46,7 @@ Definition.find({}).remove(() => {
       {
       "module": "twilio",
       "x": 700,
-      "y": 500,
+      "y": 530,
       "config": {
         "configuration": {
           "accountSid": "{{env.accountSid}}",
