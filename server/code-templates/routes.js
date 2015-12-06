@@ -1,4 +1,7 @@
 'use strict';
+
+var _ = require('lodash');
+
 {{#each modules}}
 var {{var this}} = require('./api-modules/{{this}}');
 {{/each}}
