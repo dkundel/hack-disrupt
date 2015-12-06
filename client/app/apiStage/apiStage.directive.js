@@ -64,7 +64,7 @@ function connectElements(svg, path, startElem, endElem) {
 
 
 angular.module('hackDisruptApp')
-  .directive('apiStage', function ($timeout, $rootScope) {
+  .directive('apiStage', function ($timeout, $rootScope, Definitions) {
     return {
       templateUrl: 'app/apiStage/apiStage.html',
       restrict: 'EA',
@@ -81,7 +81,15 @@ angular.module('hackDisruptApp')
 
         $timeout(() => {
           drawPaths();
-        }, 500)
+        }, 100);
+
+        scope.$watch(() => scope.configuration, () => {
+          $timeout(() => { drawPaths() }, 100);
+        });
+
+        scope.$watch(() => scope.configuration.handles, () => {
+          $timeout(() => { drawPaths() }, 100);
+        });
 
         $rootScope.$on('api-entry-moving', drawPaths)
       }

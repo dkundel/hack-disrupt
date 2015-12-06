@@ -16,7 +16,7 @@
         span.fa.fa-plus
 
     #endpointsList
-      button.endpoint-entry(ng-repeat="endp in endpoints")
+      button.endpoint-entry(ng-repeat="endp in endpoints", ng-click="Activate($index)")
         span.endpoint-entry--type {{endp.type}}
         span.endpoint-entry--url {{endp.url}}
 
@@ -35,6 +35,6 @@
     #settingsList
 
 #downloadContainer
-  button.btn.download-btn
+  button.btn.download-btn(ng-click="Download()")
     span.fa.fa-cloud-download
     span Download

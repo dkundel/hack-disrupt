@@ -39,7 +39,7 @@ exports.update = function(req, res) {
       if (key !== 'handles') {
         definition[key] = req.body[key];
       } else {
-        definition.handles = req.body.handles
+        definition.handles = req.body.handles;
       }
     });
     definition.save(function (err) {

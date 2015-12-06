@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('hackDisruptApp')
-  .controller('MainCtrl', function ($scope, $http, $rootScope, $q, $timeout) {
+  .controller('MainCtrl', function ($scope, $http, $rootScope, $q, $timeout, Definitions) {
     let modulePromise = $http.get('/api/modules').then((resp) => {
       $scope.modules = {};
       resp.data.forEach((mod) => {
@@ -11,12 +11,11 @@ angular.module('hackDisruptApp')
       $scope.categories = _.uniq(_.map(resp.data, (mod) => mod.category)).sort();
     });
 
-    let definitionPromise = $http.get('/api/definitions').then((resp) => {
-      $scope.configuration = resp.data[0];
-      return resp.data[0];
+    $scope.$watch(() => Definitions.Active, () => {
+      $scope.configuration = Definitions.Active;
     });
 
-    $q.all([modulePromise, definitionPromise]).then(() => {
+    $q.all([modulePromise]).then(() => {
       $scope.loaded = true;
     });
 
@@ -60,8 +59,6 @@ angular.module('hackDisruptApp')
     }
 
     function save() {
-      $http.put('/api/definitions/' + $scope.configuration._id, angular.toJson($scope.configuration)).then(() => {
-        console.log('Updated!');
-      });
+      Definitions.Save(JSON.parse(angular.toJson($scope.configuration)));
     }
   });
