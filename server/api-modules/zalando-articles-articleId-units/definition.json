@@ -1,0 +1,17 @@
+{
+  "id": "zalando-articles-articleId-units",
+  "name": "Zalando Article Units with articleId",
+  "type": "GET",
+  "category": "Other",
+  "logo": "https://secure-media.ztat.net/media/teaser/logo/zalando-logo.png",
+  "config": [
+    {
+      "params": [
+        {
+          "name": "ArticleId",
+          "id": "ArticleId"
+        }
+      ]
+    }
+  ]
+}

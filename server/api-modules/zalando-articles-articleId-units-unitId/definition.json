@@ -1,18 +1,21 @@
 {
-  "id": "zalando",
+  "id": "zalando-articles-with-id",
   "name": "Zalando Articles with Id",
   "type": "GET",
   "category": "Other",
   "logo": "https://secure-media.ztat.net/media/teaser/logo/zalando-logo.png",
   "config": [
     {
-      "id": "params",
-      "name": "Parameters",
-      "options": [
+      "params": [
+        {
+          "name": "ArticleId",
+          "id": "ArticleId"
+        },
         {
           "name": "ArticleId",
           "id": "ArticleId"
         }
+
       ]
     }
   ]

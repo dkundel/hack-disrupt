@@ -14,13 +14,17 @@
         idx: '@index'
       },
       link: function (scope, element, attrs) {
-
+        let index = parseInt(scope.idx, 10);
         let onDrag = () => {
           $rootScope.$broadcast('api-entry-moving');
         }
 
         scope.delete = () => {
           $rootScope.$broadcast('api-entry-delete', scope.idx);
+        }
+
+        scope.swap = () => {
+          $rootScope.$broadcast('api-entry-swap', scope.idx);
         }
 
         let onStop = () => {
