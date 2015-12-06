@@ -30,12 +30,19 @@ exports.create = function(req, res) {
 
 // Updates an existing definition in the DB.
 exports.update = function(req, res) {
+  console.dir(req.body);
   if(req.body._id) { delete req.body._id; }
   Definition.findById(req.params.id, function (err, definition) {
     if (err) { return handleError(res, err); }
     if(!definition) { return res.status(404).send('Not Found'); }
-    var updated = _.merge(definition, req.body);
-    updated.save(function (err) {
+    Object.keys(req.body).forEach((key) => {
+      if (key !== 'handles') {
+        definition[key] = req.body[key];
+      } else {
+        definition.handles = req.body.handles
+      }
+    });
+    definition.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.status(200).json(definition);
     });
