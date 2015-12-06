@@ -12,12 +12,14 @@ let template = function(config, req, env, value){
 
 module.exports = function(REQ, ENV, CONFIG) {
 	return (value) => {
+		//console.log(value.content[0].units);
+		//console.log("Value: %j", value);
 		let config = template(CONFIG, REQ, ENV, value);
 		console.log("Params: %j", config);
 		let client = require('twilio')(config.configuration.accountSid, config.configuration.authToken);
 
 		let callback = function(resolve, reject, err, message) {
-			if(err == null){
+			if(err != null){
 				reject(err);
 			} else{
 				resolve(message);

@@ -1,6 +1,8 @@
 'use strict';
 
-function drawPath(svg, path, startX, startY, endX, endY) {
+var h = new Object();
+
+function drawPath(svg, path, startX, startY, endX, endY, flip) {
 
 
   // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
@@ -32,36 +34,25 @@ function drawPath(svg, path, startX, startY, endX, endY) {
                   " A" + delta + " " +  delta + " 0 0 " + arc2 + " " + endX + " " + (startY + 3*delta) +
                   " V" + endY );
 
-  var divs = document.querySelectorAll('path');
-
-  [].forEach.call(divs, function(path) {
-    // do whatever
-    var length = path.getTotalLength();
-    // Clear any previous transition
-    path.style.transition = path.style.WebkitTransition =
-      'none';
-    // Set up the starting positions
-    path.style.strokeDasharray = length + ' ' + length;
-    path.style.strokeDashoffset = length;
-    // Trigger a layout so styles are calculated & the browser
-    // picks up the starting position before animating
-    path.getBoundingClientRect();
-    // Define our transition
-    path.style.transition = path.style.WebkitTransition =
-    'stroke-dashoffset 1s ease-in-out';
-    // Go!
-    path.style.strokeDashoffset = '0';
-  });
 }
 
 function connectElements(svg, path, startElem, endElem) {
   var svgContainer= $("#svgContainer");
 
   // if first element is lower than the second, swap!
-  if(startElem.offset().top > endElem.offset().top){
+  if (startElem.offset().top > endElem.offset().top){
       var temp = startElem;
       startElem = endElem;
       endElem = temp;
+      h[path.attr("id")] = true;
+      // path.attr("direction", true);
+
+      // console.log(true);
+      // console.log(path.attr("direction"));
+  } else {
+      h[path.attr("id")] = false;
+      // path.attr("direction", false);
+      // console.log(path.attr("direction"));
   }
 
   // get (top, left) corner coordinates of the svg container
@@ -82,7 +73,40 @@ function connectElements(svg, path, startElem, endElem) {
   var endY = endCoord.top  - svgTop;
 
   // call function for drawing the path
+
+  for (var k in h) {
+    console.log('key is: ' + k + ', value is: ' + eval('h.' + k));
+  }
+
   drawPath(svg, path, startX, startY, endX, endY+(startElem.outerHeight()/2));
+
+    var divs = document.querySelectorAll('path');
+
+  [].forEach.call(divs, function(path) {
+    // do whatever
+    var length = path.getTotalLength();
+    // Clear any previous transition
+    path.style.transition = path.style.WebkitTransition =
+      'none';
+    // Set up the starting positions
+    path.style.strokeDasharray = length + ' ' + length;
+    console.log("!" + path.getAttribute("id") + " " + eval('h.' + path.getAttribute("id")));
+    if (eval('h.' + path.getAttribute("id")) === true) {
+          path.style.strokeDashoffset = -length;
+    } else {
+          path.style.strokeDashoffset = length;
+    }
+
+    // Trigger a layout so styles are calculated & the browser
+    // picks up the starting position before animating
+    path.getBoundingClientRect();
+    // Define our transition
+    path.style.transition = path.style.WebkitTransition =
+    'stroke-dashoffset 1s ease-in-out';
+    // Go!
+    path.style.strokeDashoffset = '0';
+  });
+
 }
 
 

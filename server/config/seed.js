@@ -15,6 +15,51 @@ var path = require('path');
 Definition.find({}).remove(() => {
   Definition.create({
     "type": "POST",
+    "url": "/shoes/",
+    "handles": [
+      {
+      "module": "zalando-articles",
+      "x": 100,
+      "y": 100,
+      "config": {
+        "configuration": {
+        },
+        "params": {
+          "fullText": "{{value.fullText}}",
+        }
+      }
+      },
+      {
+      "module": "outlook-send",
+      "x": 100,
+      "y": 500,
+      "config": {
+        "configuration": {
+        },
+        "params": {
+          "to": "{{value.to}}",
+          "body": "Found a following shoe for you for query '{{value.fullText}}': {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}. {{value.content.0.shopUrl}}",
+          "subject": "{{value.subject}}"
+        }
+      }
+      },
+      {
+      "module": "twilio",
+      "x": 700,
+      "y": 500,
+      "config": {
+        "configuration": {
+          "accountSid": "{{env.accountSid}}",
+          "authToken": "{{env.authToken}}"
+        },
+        "params": {
+          "from": "{{value.from}}",
+          "to": "{{value.to}}",
+          "body": "Hey, found a new shoe model: {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}!"
+        }
+      }}]}),
+  Definition.create({
+    "type": "POST",
     "url": "/mail/",
     "handles": [
       {

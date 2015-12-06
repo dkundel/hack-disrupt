@@ -6,8 +6,12 @@
   "logo": "/assets/images/zalando.png",
   "config": [
     {
-      "params": [
+      "name": "Parameters",
+      "id": "params",
+      "options": [
         {
+          "name": "Search",
+          "id": "fullText"
         }
       ]
     }

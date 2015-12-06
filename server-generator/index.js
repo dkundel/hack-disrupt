@@ -87,6 +87,9 @@ var generateRoutes = (directory, dfs) => {
     hbs.registerHelper('var', function(context) {
         return context.replace(/[\-]+/g,'');
     });
+    hbs.registerHelper('lower', function(str) {
+      return str.toLowerCase();
+    });
     let compiled = hbs.compile(fileContents);
     var routes = compiled({
       modules: _.uniq(modules),
