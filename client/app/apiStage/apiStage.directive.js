@@ -2,7 +2,7 @@
 
 function drawPath(svg, path, startX, startY, endX, endY) {
 
-  
+
   // get the path's stroke width (if one wanted to be  really precize, one could use half the stroke size)
   var stroke =  parseFloat(path.css("stroke-width"));
   // check if the svg is big enough to draw the path, if not, set heigh/width
@@ -31,9 +31,9 @@ function drawPath(svg, path, startX, startY, endX, endY) {
                   " H" + (endX - delta*Math.sign(deltaX)) +
                   " A" + delta + " " +  delta + " 0 0 " + arc2 + " " + endX + " " + (startY + 3*delta) +
                   " V" + endY );
-                  
+
   var divs = document.querySelectorAll('path');
-  
+
   [].forEach.call(divs, function(path) {
     // do whatever
     var length = path.getTotalLength();
@@ -50,8 +50,8 @@ function drawPath(svg, path, startX, startY, endX, endY) {
     path.style.transition = path.style.WebkitTransition =
     'stroke-dashoffset 1s ease-in-out';
     // Go!
-    path.style.strokeDashoffset = '0';  
-  });                                
+    path.style.strokeDashoffset = '0';
+  });
 }
 
 function connectElements(svg, path, startElem, endElem) {
@@ -83,7 +83,7 @@ function connectElements(svg, path, startElem, endElem) {
 
   // call function for drawing the path
   drawPath(svg, path, startX, startY, endX, endY+(startElem.outerHeight()/2));
-    
+
 }
 
 
@@ -94,7 +94,6 @@ angular.module('hackDisruptApp')
       restrict: 'EA',
       link: function (scope, element, attrs) {
         let drawPaths = () => {
-
           scope.configuration.handles.forEach((entry, idx) => {
             if (idx+1 !== scope.configuration.handles.length) {
               connectElements(element.find('#paths'), element.find(`#path${idx}`), element.find(`#apiEntry${idx}`), element.find(`#apiEntry${idx+1}`))
@@ -116,29 +115,6 @@ angular.module('hackDisruptApp')
         });
 
         $rootScope.$on('api-entry-moving', drawPaths)
-
-        $rootScope.$on('api-entry-delete', (evt, idx) => {
-          scope.configuration.handles.splice(idx, 1);
-          $timeout(() => {
-            drawPaths()
-          }, 100);
-        });
-
-        let swapVar;
-        let swapIdx;
-        let isSwapping = false;
-        $rootScope.$on('api-entry-swap', (evt, idx) => {
-          if (!isSwapping) {
-            swapVar = scope.configuration.handles[idx];
-            swapIdx = idx;
-            isSwapping = true;
-          } else {
-            scope.configuration.handles[swapIdx] = scope.configuration.handles[idx];
-            scope.configuration.handles[idx] = swapVar;
-            isSwapping = false;
-            drawPaths();
-          }
-        });
       }
     };
   });
