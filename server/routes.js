@@ -103,7 +103,7 @@ module.exports = function(app) {
       .then(function(val){console.log(val); res.send(val);})
       .catch(function(val){console.log(val); res.send(val);});
   });
-  
+
 
   app.post('/zalando-article-reviews', function(req, res){
     let zalando = require('./api-modules/zalando-article-reviews')({}, {}, {});
