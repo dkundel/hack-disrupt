@@ -10,27 +10,18 @@ var _ = require('lodash');
 var generateServer = require('../server-generator');
 var mime = require('mime');
 var fs = require('fs');
+var Definition = require('../server/api/definitions/definition.model');
 
 var handleRequest = (route, req, res) => {
-  var promise = null;
-  for(var i in route.handles){
-    var handle = route.handles[i];
-
-    if(promise == null){
-      console.log("Initializing chain with module:" + handle.module);
-      promise = apiModules(handle.module)(handle.config, req, req.body);
-    } else{
-      console.log("Continuing with module:" + handle.module);
-
-      var localPromise = promise;
-      promise = localPromise.then(v => apiModules(handle.module)(handle.config, req, _.merge(req.body, v)));
-
-      localPromise.catch(function(val){console.log(val); res.send(val);});
+  let lastPromise = undefined;
+  route.handles.forEach((handle) => {
+    if (!lastPromise) {
+      lastPromise = apiModules(handle.module)(handle.config, req)(req.body);
+    } else {
+      lastPromise = lastPromise.then((v) => apiModules(handle.module)(handle.config, req)(_.merge(req.body, v)));
     }
-  }
-
-  promise.then(function(val){console.log(val); res.send(val);});
-  promise.catch(function(val){console.log(val); res.send(val);});
+  });
+  return lastPromise.then((v) => { res.send(v); return true; }).catch((v) => res.status(500).send(v));
 }
 
 module.exports = function(app) {
@@ -41,7 +32,51 @@ module.exports = function(app) {
   app.use('/api/definitions', require('./api/definitions'));
   //app.use('/auth', require('./auth'));
   try{
-    var routes = require('./api/definition').routes;
+    var routes = [{
+    "type": "POST",
+    "url": "/shoes/",
+    "handles": [
+      {
+      "module": "zalando-articles",
+      "x": 100,
+      "y": 520,
+      "config": {
+        "configuration": {
+        },
+        "params": {
+          "fullText": "{{value.fullText}}",
+        }
+      }
+      },
+      {
+      "module": "outlook-send",
+      "x": 100,
+      "y": 520,
+      "config": {
+        "configuration": {
+        },
+        "params": {
+          "to": "{{value.to}}",
+          "body": "Found a following shoe for you for query '{{value.fullText}}': {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}. {{value.content.0.shopUrl}}",
+          "subject": "{{value.subject}}"
+        }
+      }
+      },
+      {
+      "module": "twilio",
+      "x": 100,
+      "y": 520,
+      "config": {
+        "configuration": {
+          "accountSid": "{{env.accountSid}}",
+          "authToken": "{{env.authToken}}"
+        },
+        "params": {
+          "from": "{{value.from}}",
+          "to": "{{value.to}}",
+          "body": "Hey, found new shoe model: {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}!"
+        }
+      }}]}]
     for(var i in routes){
       let route = routes[i];
       console.log("Route: " +  route);
@@ -53,9 +88,10 @@ module.exports = function(app) {
         app.get(route.url, (req, res) => handleRequest(route, req, res));
       }
       console.log("Route ready: " + route.type + " " + route.url);
-    }
+    };
   }
   catch (e){
+    console.log(e);
   }
 
   app.get('/download', function(req, res){
@@ -88,6 +124,21 @@ module.exports = function(app) {
   app.get('/outlook', function(req, res){
     var out = require('./api/outlook/index.controller');
     out.get(req, res);
+  });
+
+  app.get('/outlook/authenticate', function(req, res){
+    var authHelper = require('./api/outlook/authHelper');
+    res.send("<a href='" + authHelper.getAuthUrl() + "'>Email</a>");
+  });
+  app.get('/outlookAuthorize', function(req, res){
+    var code = req.query.code;
+    var authHelper = require('./api/outlook/authHelper');
+    authHelper.getTokenFromCode(code, (re, rs, __, t) => {
+      console.log(t);
+      re.session.access_token = t.access_token;
+      re.session.token = t;
+      rs.send(t);
+     }, req, res);
   });
 
   app.post('/esri', function(req, res){
