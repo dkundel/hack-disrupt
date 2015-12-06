@@ -1,7 +1,7 @@
 .api-entry {
   position: absolute;
   width: 360px;
-  background: $lightest;
+  background: $lightcolor;
 
   .api-entry--header {
     height: 50px;
@@ -38,6 +38,7 @@
 
   .api-entry--body {
     padding: 15px;
+    padding-bottom: 5px;
 
     .api-entry--config {
       h3 {
@@ -67,6 +68,23 @@
         padding: 2px;
         margin-bottom: 2px;
       }
+    }
+  }
+
+  .api-entry--footer {
+    padding: 15px;
+
+    button {
+      background: $lightcolor;
+      border-radius: 0;
+
+      &:hover {
+        background: $lightgrey;
+      }
+    }
+
+    .fa-trash {
+      color: $highlight-second;
     }
   }
 }

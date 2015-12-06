@@ -89,7 +89,13 @@ Definition.find({}).remove(() => {
 });
 
 Project.find({}).remove(() => {
-  
+  Project.create({
+    'name': 'Awesome Hack',
+    'settings': [
+      { 'key': 'twilioNumber', 'value': '+12398190231' },
+      { 'key': 'email', 'value': 'yoda@jedi.com' }
+    ]
+  });
 });
 
 Module.find({}).remove(() => {

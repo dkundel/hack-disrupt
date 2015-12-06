@@ -22,4 +22,20 @@ angular.module('hackDisruptApp')
         console.log('Updated!');
       });
     }
+
+    this.Add = (def) => {
+      this.All.push(def);
+      this.Active = def;
+      this.CurrentIdx = this.All.length -1;
+
+      $http.post('/api/definitions', def).then(() => {
+        console.log('CREATED');
+      });
+    }
+
+    this.Download = () => {
+      $http.post('/download', {routes: angular.copy(this.All)}).then((resp) => {
+        console.log(resp);
+      });
+    }
   });

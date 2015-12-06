@@ -10,12 +10,17 @@
         configuration: '=config',
         module: '=module',
         x: '=x',
-        y: '=y'
+        y: '=y',
+        idx: '@index'
       },
       link: function (scope, element, attrs) {
 
         let onDrag = () => {
           $rootScope.$broadcast('api-entry-moving');
+        }
+
+        scope.delete = () => {
+          $rootScope.$broadcast('api-entry-delete', scope.idx);
         }
 
         let onStop = () => {
