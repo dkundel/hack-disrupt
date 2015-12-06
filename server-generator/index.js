@@ -55,10 +55,8 @@ var generateRoutes = (directory, dfs) => {
   ];
   var modules = [];
 
-  console.log("C " + j + " " + JSON.stringify(definitions));
   for(var i in definitions){
     var route = definitions[i];
-    console.log("R " + i + " " + JSON.stringify(route));
     if(route.type == "POST"){
       route.post = true;
     } else if(route.type == "GET"){
@@ -68,12 +66,11 @@ var generateRoutes = (directory, dfs) => {
     var localModules = [];
     for(var j in route.handles){
       var handle = route.handles[j];
-      console.log("J " + j + " " + JSON.stringify(handle));
       handle.stringconfig = JSON.stringify(handle.config);
       modules.push(handle.module);
       localModules.push(handle.module);
     }
-    route.modules = _.uniq(localModules);
+    route.modules = localModules;
   }
   fs.readFile('./server/code-templates/routes.js', 'utf8', function (err, fileContents) {
     if(err){
@@ -87,7 +84,9 @@ var generateRoutes = (directory, dfs) => {
     hbs.registerHelper('json', function(context) {
         return JSON.stringify(context, null, 4);
     });
-
+    hbs.registerHelper('var', function(context) {
+        return context.replace(/[\-]+/g,'');
+    });
     let compiled = hbs.compile(fileContents);
     var routes = compiled({
       modules: _.uniq(modules),
@@ -103,11 +102,11 @@ var generateServer = () => {
       console.log("efs" + JSON.stringify(defs));
 
       var archiveName = uuid.v4();
-      ncp('./server/', './' + archiveName, function (err) {
-
-      if (err) {
-        return console.error(err);
-      }
+      ncp('./rest-server/', './' + archiveName, function (err) {
+        ncp('./server/api-modules/', './' + archiveName + '/api-modules/', function (err) {
+        if (err) {
+          return console.error(err);
+        }
 
       console.log('done!');
 
@@ -131,7 +130,7 @@ var generateServer = () => {
       archive.pipe(output);
       archive.glob('./' + archiveName + '/**/*');
       archive.finalize();
-    })})});
+    })})})});
 
   return promise;
 }
