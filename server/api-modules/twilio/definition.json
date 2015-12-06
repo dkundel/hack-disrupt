@@ -2,7 +2,7 @@
   "id": "twilio",
   "name": "Twilio Send SMS",
   "type": "POST",
-  "category": "Other",
+  "category": "Communication",
   "logo": "http://placehold.it/50x50",
   "config": [
     {

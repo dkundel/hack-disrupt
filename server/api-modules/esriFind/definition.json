@@ -2,11 +2,13 @@
   "id": "esriFind",
   "name": "Esri Find",
   "type": "Find",
-  "category": "Other",
+  "category": "Location",
   "logo": "http://webapps-cdn.esri.com/Apps/MegaMenu/img/logo.jpg",
   "config": [
     {
-      "params": [
+      "id": "params",
+      "name": "Parameters",
+      "options": [
         {
           "name": "Address",
           "id": "address"

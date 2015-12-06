@@ -130,6 +130,7 @@ html, body, body > div {
     top: 30px;
     left: 30px;
     background: $lightcolor;
+    z-index: 9999;
     p {
       margin: 15px 30px;
       line-height: 1;
@@ -145,11 +146,63 @@ html, body, body > div {
     border-radius: 100%;
     background: $highlight-second;
     text-align: center;
+    z-index: 9999;
 
     span {
       vertical-align: middle;
       line-height: 80px;
       color: #fff;
+    }
+  }
+
+  #createDialog {
+    position: absolute;
+    bottom: 115px;
+    right: 70px;
+    width: 300px;
+    z-index: 900;
+    background: $lightcolor;
+
+    padding-bottom: 15px;
+
+    h3 {
+      margin: 0;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      padding-left: 15px;
+      padding-right: 15px;
+      font-size: 18px;
+      font-weight: 300;
+      background: $lightgrey;
+
+      .fa {
+        color: $darkgrey-light;
+      }
+    }
+
+    button {
+      width: 100%;
+      display: block;
+      padding: 15px 15px;
+      border: 0;
+      border-bottom: 1px solid $lightgrey;
+      background: $lightcolor;
+      text-align: left;
+
+      .fa {
+        color: $lightgrey;
+      }
+
+      &:hover {
+        background: $lightest;
+        .fa {
+          color: $darkgrey-light;
+        }
+      }
+
+      &:first-of-type {
+        border-top: 1px solid $lightgrey;
+      }
     }
   }
 

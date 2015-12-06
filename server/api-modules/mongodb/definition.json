@@ -2,7 +2,7 @@
   "id": "mongodb",
   "name": "MongoDB",
   "type": "Find",
-  "category": "Other",
+  "category": "Database",
   "logo": "http://placehold.it/40x40",
   "config": [
     {

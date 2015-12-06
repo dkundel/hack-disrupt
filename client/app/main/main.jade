@@ -7,7 +7,22 @@ block content
         small {{configuration.type}}
         | {{configuration.url}}
 
-    #createButton
+    #createButton(ng-click="showNewDialog = !showNewDialog")
       span.fa.fa-plus.fa-3x
 
-    #apiStage(api-stage)
+    #createDialog(ng-show="showNewDialog")
+      h3
+        span(ng-show="showModuleSelection", ng-click="showModuleSelection = false").fa.fa-chevron-left.fa-fw
+        span(ng-bind="showModuleSelection ? 'Back' : 'Category'")
+        span.fa.fa-close.pull-right(ng-click="showNewDialog = false")
+      #categorySelecion(ng-hide="showModuleSelection")
+        button(ng-click="filterByCategory('All')")
+          | All
+          span.fa.fa-chevron-right.pull-right
+        button(ng-repeat="cat in categories", ng-click="filterByCategory(cat)")
+          | {{cat}}
+          span.fa.fa-chevron-right.pull-right
+      #moduleSelection(ng-show="showModuleSelection")
+        button(ng-repeat="mod in filteredCategories", ng-click="create(mod)") {{mod.name}}
+
+    #apiStage(api-stage, ng-if="loaded")

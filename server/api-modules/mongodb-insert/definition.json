@@ -2,7 +2,7 @@
   "id": "mongodb-insert",
   "name": "MongoDB",
   "type": "Insert",
-  "category": "Other",
+  "category": "Database",
   "logo": "http://placehold.it/40x40",
   "config": [
     {
