@@ -25,6 +25,29 @@ angular.module('hackDisruptApp')
       }, 0);
     });
 
+    $rootScope.$on('api-entry-delete', (evt, idx) => {
+      $scope.configuration.handles.splice(idx, 1);
+      $timeout(() => {
+        save();
+      }, 0);
+    });
+
+    let swapVar;
+    let swapIdx;
+    let isSwapping = false;
+    $rootScope.$on('api-entry-swap', (evt, idx) => {
+      if (!isSwapping) {
+        swapVar = $scope.configuration.handles[idx];
+        swapIdx = idx;
+        isSwapping = true;
+      } else {
+        $scope.configuration.handles[swapIdx] = $scope.configuration.handles[idx];
+        $scope.configuration.handles[idx] = swapVar;
+        isSwapping = false;
+        save();
+      }
+    });
+
     $scope.activeCategory = 'All';
 
     $scope.filterByCategory = (category) => {
