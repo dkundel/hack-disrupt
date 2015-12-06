@@ -1,0 +1,33 @@
+{
+  "id": "outlook-send",
+  "name": "Outlook Send EMail",
+  "type": "POST",
+  "category": "EMail",
+  "logo": "http://placehold.it/50x50",
+  "config": [
+    {
+      "name": "Configuration",
+      "id": "configuration",
+      "options": [
+      ]
+    },
+    {
+      "name": "Parameters",
+      "id": "params",
+      "options": [
+        {
+          "name": "To",
+          "id": "to"
+        },
+        {
+          "name": "Subject",
+          "id": "subject"
+        },
+        {
+          "name": "Message",
+          "id": "body"
+        }
+      ]
+    }
+  ]
+}

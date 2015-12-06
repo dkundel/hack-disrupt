@@ -11,7 +11,7 @@
       "options": [
         {
           "name": "Database Name",
-          "id": "hostname"
+          "id": "database"
         },
         {
           "name": "Port",
