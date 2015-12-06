@@ -37,7 +37,7 @@ Definition.find({}).remove(() => {
         "configuration": {
         },
         "params": {
-          "to": "{{value.to}}",
+          "email": "{{value.email}}",
           "body": "Found a following shoe for you for query '{{value.fullText}}': {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}. {{value.content.0.shopUrl}}",
           "subject": "{{value.subject}}"
         }

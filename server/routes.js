@@ -18,10 +18,15 @@ var handleRequest = (route, req, res) => {
     if (!lastPromise) {
       lastPromise = apiModules(handle.module)(handle.config, req)(req.body);
     } else {
+      lastPromise.catch((v) => {
+    console.log(v);
+    return res.status(500).send(v)});
       lastPromise = lastPromise.then((v) => apiModules(handle.module)(handle.config, req)(_.merge(req.body, v)));
     }
   });
-  return lastPromise.then((v) => { res.send(v); return true; }).catch((v) => res.status(500).send(v));
+  return lastPromise.then((v) => { res.send(v); return true; }).catch((v) => {
+    console.log(v);
+    return res.status(500).send(v)});
 }
 
 module.exports = function(app) {
@@ -56,7 +61,7 @@ module.exports = function(app) {
         "configuration": {
         },
         "params": {
-          "to": "{{value.to}}",
+          "email": "{{value.email}}",
           "body": "Found a following shoe for you for query '{{value.fullText}}': {{value.content.0.name}}, {{value.content.0.units.0.price.formatted}}. {{value.content.0.shopUrl}}",
           "subject": "{{value.subject}}"
         }

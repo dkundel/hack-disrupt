@@ -17,7 +17,7 @@
       "options": [
         {
           "name": "To",
-          "id": "to"
+          "id": "email"
         },
         {
           "name": "Subject",
