@@ -93,7 +93,7 @@ angular.module('hackDisruptApp')
 
         $rootScope.$on('api-entry-moving', drawPaths)
 
-        $rootScope.$on('api-entry-delete', (idx) => {
+        $rootScope.$on('api-entry-delete', (evt, idx) => {
           scope.configuration.handles.splice(idx, 1);
           $timeout(() => {
             drawPaths()

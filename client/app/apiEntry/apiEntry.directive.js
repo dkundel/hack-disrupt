@@ -24,7 +24,7 @@
         }
 
         scope.swap = () => {
-          $rootScope.$broadcast('api-entry-swap', index);
+          $rootScope.$broadcast('api-entry-swap', scope.idx);
         }
 
         let onStop = () => {
