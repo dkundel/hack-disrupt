@@ -45,7 +45,7 @@ module.exports = function(REQ, ENV, CONFIG) {
 					"ToRecipients": [
 					{
 						"EmailAddress": {
-							"Address": config.params.to
+							"Address": config.params.email
 						}
 					}
 					]
