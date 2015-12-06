@@ -22,10 +22,4 @@ angular.module('hackDisruptApp')
         console.log('Updated!');
       });
     }
-
-    this.Download = () => {
-      $http.post('/download', {routes: angular.copy(this.All)}).then((resp) => {
-        console.log(resp);
-      });
-    }
   });
