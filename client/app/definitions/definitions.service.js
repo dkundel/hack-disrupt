@@ -24,7 +24,7 @@ angular.module('hackDisruptApp')
     }
 
     this.Download = () => {
-      $http.post('/download').then((resp) => {
+      $http.post('/download', {routes: angular.copy(this.All)}).then((resp) => {
         console.log(resp);
       });
     }

@@ -8,12 +8,13 @@
 var User = require('../api/user/user.model');
 var Definition = require('../api/definitions/definition.model');
 var Module = require('../api/module/module.model');
+var Project = require('../api/project/project.model');
 var fs = require('fs');
 var path = require('path');
 
 Definition.find({}).remove(() => {
   Definition.create({
-	  "type": "POST",
+    "type": "POST",
     "url": "/mail/",
     "handles": [
       {
@@ -27,9 +28,9 @@ Definition.find({}).remove(() => {
           "subject": "{{value.subject}}"
         }
       }
-		}]}),
+    }]}),
   Definition.create({
-	  "type": "POST",
+    "type": "POST",
     "url": "/user/",
     "handles": [
       {
@@ -46,7 +47,7 @@ Definition.find({}).remove(() => {
           "name": "{{value.name}}"
         }
       }
-		}]}),
+    }]}),
   Definition.create({
       "type": "POST",
       "url": "/example/:id",
