@@ -64,12 +64,16 @@ angular.module('hackDisruptApp')
       $scope.showModuleSelection = false;
 
       let config = {};
-      module.config.forEach((c) => {
-        config[c.id] = {};
-        c.options.forEach((o) => {
-          config[c.id][o.id] = '';
+      if (module.config) {
+        module.config.forEach((c) => {
+          config[c.id] = {};
+          if (c.options) {
+            c.options.forEach((o) => {
+              config[c.id][o.id] = '';
+            });
+          }
         });
-      });
+      }
 
       $scope.configuration.handles.push({
         x: 100,

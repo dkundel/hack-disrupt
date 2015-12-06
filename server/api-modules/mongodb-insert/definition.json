@@ -3,7 +3,7 @@
   "name": "MongoDB",
   "type": "Insert",
   "category": "Database",
-  "logo": "http://placehold.it/40x40",
+  "logo": "/assets/images/mongodb.png",
   "config": [
     {
       "name": "Configuration",

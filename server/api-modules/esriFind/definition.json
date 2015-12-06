@@ -3,7 +3,7 @@
   "name": "Esri Find",
   "type": "Find",
   "category": "Location",
-  "logo": "http://webapps-cdn.esri.com/Apps/MegaMenu/img/logo.jpg",
+  "logo": "/assets/images/esri.png",
   "config": [
     {
       "id": "params",

@@ -39,13 +39,15 @@
         element.draggable({grid: [20,20], containment: 'parent', drag: onDrag, stop: onStop});
         element.css({top: scope.y, left: scope.x});
 
-        if (Object.keys(scope.configuration).length === 0) {
-          Object.keys(scope.module.config).forEach((conf) => {
-            scope.configuration[conf.id] = {};
-            Object.keys(conf.options).forEach((opt) => {
-              scope.configuration[conf.id][opt.id] = '';
+        if (scope.configuration && Object.keys(scope.configuration).length === 0) {
+          if (scope.module.config) {
+            Object.keys(scope.module.config).forEach((conf) => {
+              scope.configuration[conf.id] = {};
+              Object.keys(conf.options).forEach((opt) => {
+                scope.configuration[conf.id][opt.id] = '';
+              });
             });
-          });
+          }
         }
       }
     };

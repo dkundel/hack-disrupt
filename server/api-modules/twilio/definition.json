@@ -3,7 +3,7 @@
   "name": "Twilio Send SMS",
   "type": "POST",
   "category": "Communication",
-  "logo": "http://placehold.it/50x50",
+  "logo": "/assets/images/twilio.png",
   "config": [
     {
       "name": "Configuration",
