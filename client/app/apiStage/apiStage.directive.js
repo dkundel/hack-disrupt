@@ -99,6 +99,22 @@ angular.module('hackDisruptApp')
             drawPaths()
           }, 100);
         });
+
+        let swapVar;
+        let swapIdx;
+        let isSwapping = false;
+        $rootScope.$on('api-entry-swap', (evt, idx) => {
+          if (!isSwapping) {
+            swapVar = scope.configuration.handles[idx];
+            swapIdx = idx;
+            isSwapping = true;
+          } else {
+            scope.configuration.handles[swapIdx] = scope.configuration.handles[idx];
+            scope.configuration.handles[idx] = swapVar;
+            isSwapping = false;
+            drawPaths();
+          }
+        });
       }
     };
   });
