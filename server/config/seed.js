@@ -20,7 +20,7 @@ Definition.find({}).remove(() => {
       {
       "module": "zalando-articles",
       "x": 100,
-      "y": 520,
+      "y": 100,
       "config": {
         "configuration": {
         },
@@ -29,10 +29,10 @@ Definition.find({}).remove(() => {
         }
       }
       },
-      /*{
+      {
       "module": "outlook-send",
       "x": 100,
-      "y": 520,
+      "y": 500,
       "config": {
         "configuration": {
         },
@@ -42,11 +42,11 @@ Definition.find({}).remove(() => {
           "subject": "{{value.subject}}"
         }
       }
-      },*/
+      },
       {
       "module": "twilio",
-      "x": 100,
-      "y": 520,
+      "x": 700,
+      "y": 500,
       "config": {
         "configuration": {
           "accountSid": "{{env.accountSid}}",
