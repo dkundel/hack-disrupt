@@ -1,19 +1,20 @@
 'use strict';
 {{#each modules}}
-var {{this}} = require('./api-modules/{{this}}');
+var {{var this}} = require('./api-modules/{{this}}');
 {{/each}}
 
+var env = require('./config/environment');
 var handleRequest = (modules, configs, req, res) => {
   var promise = null;
-  for(var i in modules){
+  for (var i in modules) {
     var module = modules[i];
 	var config = configs[i];
 
-    if(promise == null){
-      promise = module(config, req, req.body);
-    } else{
+    if (promise == null) {
+      promise = module(req, env, config)(req.body);
+    } else {
       var localPromise = promise;
-      promise = localPromise.then(value => module(config, req, _.merge(req.body, value)));
+      promise = localPromise.then(value => module(req, env, config)(_.merge(req.body, value)));
 
       localPromise.catch(function(val){console.log(val); res.send(val);});
     }
@@ -36,9 +37,9 @@ var configs = {
 module.exports = function(app) {
 	{{#each routes}}
 		{{#if this.post}}
-	app.post("{{this.url}}", (req, res) => handleRequest([{{this.modules}}], configs["{{this.url}}"], req, res));
+	app.post("{{this.url}}", (req, res) => handleRequest([{{#each this.modules}}{{var this}}, {{/each}}], configs["{{this.url}}"], req, res));
 		{{else}}
-	app.get("{{this.url}}", (req, res) => handleRequest([{{this.modules}}], configs["{{this.url}}"],req, res));
+	app.get("{{this.url}}", (req, res) => handleRequest([{{#each this.modules}}{{var this}}, {{/each}}], configs["{{this.url}}"],req, res));
 		{{/if}}
 	{{/each}}
 };
