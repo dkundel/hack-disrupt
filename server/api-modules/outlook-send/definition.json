@@ -3,7 +3,7 @@
   "name": "Outlook Send EMail",
   "type": "POST",
   "category": "EMail",
-  "logo": "http://placehold.it/50x50",
+  "logo": "http://www.androidpolice.com/wp-content/uploads/2015/04/nexus2cee_Outlook-Thumb.png",
   "config": [
     {
       "name": "Configuration",
