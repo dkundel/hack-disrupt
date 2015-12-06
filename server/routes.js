@@ -103,13 +103,155 @@ module.exports = function(app) {
       .then(function(val){console.log(val); res.send(val);})
       .catch(function(val){console.log(val); res.send(val);});
   });
+  
 
-  app.post('/zalando', function(req, res){
-    let zalando = require('./api-modules/zalando')({}, {}, {});
+  app.post('/zalando-article-reviews', function(req, res){
+    let zalando = require('./api-modules/zalando-article-reviews')({}, {}, {});
     zalando(req.body)
       .then(function(val){console.log(val); res.send(val);})
       .catch(function(val){console.log(val); res.send(val);});
   });
+
+  app.post('/zalando-article-reviews-reviewId', function(req, res){
+    let zalando = require('./api-modules/zalando-article-reviews-reviewId')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-article-reviews-reviewId', function(req, res){
+    let zalando = require('./api-modules/zalando-article-reviews-reviewId')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-article-reviews-summaries', function(req, res){
+    let zalando = require('./api-modules/zalando-article-reviews-summaries')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-article-reviews-summaries-articleModelId', function(req, res){
+    let zalando = require('./api-modules/zalando-article-reviews-summaries-articleModelId')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles', function(req, res){
+    let zalando = require('./api-modules/zalando-articles')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId-media', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId-media')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId-media-reviews', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId-media-reviews')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId-media-reviews-reviews-summary', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId-media-reviews-reviews-summary')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId-units', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId-units')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-articles-articleId-units-unitId', function(req, res){
+    let zalando = require('./api-modules/zalando-articles-articleId-units-unitId')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-brands', function(req, res){
+    let zalando = require('./api-modules/zalando-brands')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-brands-key', function(req, res){
+    let zalando = require('./api-modules/zalando-brands-key')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-categories', function(req, res){
+    let zalando = require('./api-modules/zalando-categories')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-categories-key', function(req, res){
+    let zalando = require('./api-modules/zalando-categories-key')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-domains', function(req, res){
+    let zalando = require('./api-modules/zalando-domains')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-facets', function(req, res){
+    let zalando = require('./api-modules/zalando-facets')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-filters', function(req, res){
+    let zalando = require('./api-modules/zalando-filters')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-filters-filtername', function(req, res){
+    let zalando = require('./api-modules/zalando-filters-filtername')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
+  app.post('/zalando-recommendations-articleIds', function(req, res){
+    let zalando = require('./api-modules/zalando-recommendations-articleIds')({}, {}, {});
+    zalando(req.body)
+      .then(function(val){console.log(val); res.send(val);})
+      .catch(function(val){console.log(val); res.send(val);});
+  });
+
 
   // app.post('/twilio', function(req, res){
   //   let twilio = require('./api-modules/twilio')({}, {}, {});

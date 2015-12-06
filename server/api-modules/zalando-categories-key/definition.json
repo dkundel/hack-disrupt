@@ -1,0 +1,17 @@
+{
+  "id": "zalando-categories-key",
+  "name": "Zalando Categories with Key",
+  "type": "GET",
+  "category": "Other",
+  "logo": "https://secure-media.ztat.net/media/teaser/logo/zalando-logo.png",
+  "config": [
+    {
+      "params": [
+        {
+          "name": "key",
+          "id": "key"
+        }
+      ]
+    }
+  ]
+}

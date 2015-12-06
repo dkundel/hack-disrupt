@@ -1,0 +1,17 @@
+{
+  "id": "zalando-article-reviews",
+  "name": "Zalando Articles Reviews",
+  "type": "GET",
+  "category": "Other",
+  "logo": "https://secure-media.ztat.net/media/teaser/logo/zalando-logo.png",
+  "config": [
+    {
+      "id": "params",
+      "name": "Parameters",
+      "options": [
+        {
+        }
+      ]
+    }
+  ]
+}

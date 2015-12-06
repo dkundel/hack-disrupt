@@ -1,0 +1,19 @@
+{
+  "id": "zalando-article-reviews-reviewId",
+  "name": "Zalando Article Reviews with Id",
+  "type": "GET",
+  "category": "Other",
+  "logo": "https://secure-media.ztat.net/media/teaser/logo/zalando-logo.png",
+  "config": [
+    {
+      "id": "params",
+      "name": "Parameters",
+      "options": [
+        {
+          "name": "ReviewId",
+          "id": "ReviewId"
+        }
+      ]
+    }
+  ]
+}
