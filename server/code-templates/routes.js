@@ -3,7 +3,7 @@
 var {{var this}} = require('./api-modules/{{this}}');
 {{/each}}
 
-var env = require('./config/environment');
+var env = require('./environment');
 var handleRequest = (modules, configs, req, res) => {
   var promise = null;
   for (var i in modules) {
