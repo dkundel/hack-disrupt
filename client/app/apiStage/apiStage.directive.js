@@ -59,7 +59,7 @@ function connectElements(svg, path, startElem, endElem) {
   var endY = endCoord.top  - svgTop;
 
   // call function for drawing the path
-  drawPath(svg, path, startX, startY, endX, endY);
+  drawPath(svg, path, startX, startY, endX, endY+(startElem.outerHeight()/2));
 }
 
 
