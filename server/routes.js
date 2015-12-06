@@ -8,6 +8,9 @@ var errors = require('./components/errors');
 var path = require('path');
 var _ = require('lodash');
 
+//var generateServer = require('../server-generator');
+//generateServer();
+
 var handleRequest = (route, req, res) => {
   var promise = null;
   for(var i in route.handles){
@@ -55,6 +58,34 @@ module.exports = function(app) {
     // TODO
     app.post('/:module', (req, res) => require('./api-modules')(req.params.module)(req, res));
   }
+
+  app.post('/download', function(req, res){
+    console.log(JSON.stringify(req));
+    res.send("");
+  });
+
+  app.get('/outlook2', function(req, res){
+    var out = require('./api/outlook/index.controller');
+    out.send(req, res);
+  });
+  app.get('/outlook', function(req, res){
+    var out = require('./api/outlook/index.controller');
+    out.get(req, res);
+  });
+  app.get('/outlook/authenticate', function(req, res){
+    var authHelper = require('./api/outlook/authHelper');
+    res.send("<a href='" + authHelper.getAuthUrl() + "'>Email</a>");
+  });
+  app.get('/outlookAuthorize', function(req, res){
+    var code = req.query.code;
+    var authHelper = require('./api/outlook/authHelper');
+    authHelper.getTokenFromCode(code, (re, rs, __, t) => {
+      console.log(t);
+      re.session.access_token = t.access_token;
+      re.session.token = t;
+      rs.send(t);
+     }, req, res);
+  });
 
   app.post('/esri', function(req, res){
     let esri = require('./api-modules/esri')({}, {}, {});
