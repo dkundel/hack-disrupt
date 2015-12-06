@@ -12,13 +12,9 @@ let template = function(config, req, env, value){
 var request = require('request');
 var uuid = require('node-uuid');
 
-// HardCoed to avoid the effort of authenticating and saving it to sessions... (Hackathon style ;)
-var token = {"token":{"token_type":"Bearer","expires_in":"3600","scope":"https://outlook.office.com/mail.send","access_token":"EwB4Aul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAAUdSG2/quTh64llGg78x7irSSTrnce0lUzfNnY0t3FMNhv2fumuZXzt4fOhxWfQOQUPYm+yaiVCgrRQyuXm7nZKb4KaMcUJmDfypiS+XdkFEFHfXDTPXrPZAf9Gm58JRc3ZnaA0JHBTLp/kfcSGgHAa2vyCX7Zg6zmCzoJW14w+ofxmfLKP46UrwJ294KeyQL8+pfR/7cxkhrEVElyYNTJTl0eLBXn+BVUvL91MxJXk4H8fj1PmaT0UhZa8Pv8W3DAIc8usVa9GzBmSxx4GGGlUGYKIZL/YtqahfpeFdgtfUHTwebsNb7VYvDS2phoV03loWHSFVVPeCI9Pd6DzXnigDZgAACL2y6jUl7YbzSAFKsW/E9sG4erRe1YmP6Y/rf7jFmdEXGmUI+dJI4lplC9Y4TOupP4fPrpyn+La7jFoDol0muFIgveW1wr86uUZzYufmKE+vYqEOo/ajwq5RQQNUTJd6NzqNAT3u8pVoGovgQk1beVlIHN99xLc3S+vgUYKTf4igApflp/3e+v0Q4FuS9WchgAhEvAKklHAHrkX7oTnw37fEoWd2dNmd5vReJzSLjHMY+wb+KCqT6i+qjveQwyElE1z1ep0xoqMBFnw5aid1dmJGqHVI6Ey7VQ+AZHODmX4mcmwA6IpN8zawmPceW1Ocq4brpBuIicTAR9dSYpNajrwAvRd1w35wEciv1wtl2m2DOt5vpTXZx5fQWe+xC+lNV0Qk2vWF2zhxakeXhhnOnD96e1Pw6wabIlXHN23VIsmqxZjoG0fSJ4wF+GcD8F7XuNnPYwE=","expires_at":"2015-12-12T04:19:20.768Z"}};
+// Hardcoded to avoid the effort of authenticating and saving it to sessions... (Hackathon style ;)
+var token = {"token":{"token_type":"Bearer","expires_in":"3600","scope":"https://outlook.office.com/mail.read https://outlook.office.com/mail.send https://outlook.office.com/calendars.readwrite","access_token":"EwCAAul3BAAUo4xeBIbHjhBxWOFekj4Xy2fhaGQAATMk70rzuiN5bN7AIwTaJAOu9AooVRTfh9ORrmjEkNWXohPvMjUmmysYnSahWO1Ofx19+JUjEXcHLoWk4TNeAlYAu/KZfl/F5ybCh12BYlbB5qvuCd+pDqs/3ONmo8J7mTFuMC2rgJhFiArlm/fdqGItIIW+9BHSTgnZsuK65pbi/ZcCvDgC8eSrJzg0sHbr4ODPrIvHkxJ/e8HElwE2afRRMM6wECCq/Ci0LhwCGvtWeDfkDxG1BlTXxy+V+JuQpH1Rl0Z+Me0h1lyf51IQrYNe0FXqjsWLIGNu7z+BncAFKeRzBcbo9XD5GY1Ice+0Sad0Heyp3o1vvb7erNe53JUDZgAACFiqjJDKYlD2UAF8A2/k6jTOD4Fse/qBqtUeOFX/iXCphXHDn2CAdjgkXbujhE3Fv7xmzB7CapFcyqCrjBW+mKYvaLu9Lrm2nBTGJiUku3BJ+11cZMK0tDU5KtiWWymnaSUzPkGGDfp/2OjlKw1cbjzQSgfLDU/GXZLRYDc19+5Zu7mOV1ByPDeW4tDIwkoxw2BSR4ShaZg29GGMRBKkdLA3ynX/G9qQAxDQ080lu3N/yZOxPjaNrG8Jj4WvsooEyiImTRA3SR3BzRiKai/yfe/lA9iaT+Y6JRK5Hi84j1tN5IDl/+OeMs3rCiAl1cYRvzqC2uFewtZEMvdrJPnAPAjyb75mmvpa36vF1LB/YRwzUmq3vOcP2Y/mXerFkfck/kovUXFCAQBnnq/6FrlCyWcW2o8dYp9+1mi7oFJ+b2V2vL3bnp+mgz5zfRWSPKqH5uL5Mnrgkwq3OMZrAQ==","expires_at":"2015-12-06T09:53:00.607Z"}};
 var mail = "appdev484@outlook.com";
-
-exports.send = function(req, res) {
-
-};
 
 module.exports = function(REQ, ENV, CONFIG) {
 	return (value) => {

@@ -1,0 +1,25 @@
+{
+  "id": "outlook-get",
+  "name": "Outlook Get EMail",
+  "type": "GET",
+  "category": "EMail",
+  "logo": "http://placehold.it/50x50",
+  "config": [
+    {
+      "name": "Configuration",
+      "id": "configuration",
+      "options": [
+      ]
+    },
+    {
+      "name": "Parameters",
+      "id": "params",
+      "options": [
+        {
+          "name": "Number of messages",
+          "id": "top"
+        }
+      ]
+    }
+  ]
+}
